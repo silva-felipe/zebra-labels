@@ -6,6 +6,9 @@ from concat_pdf import merge_pdf
 
 
 def main():
+    # make sure the directories exist
+    os.makedirs('queue', exist_ok=True)
+    os.makedirs('zebras_pdf', exist_ok=True)
     # Configure the Streamlit page
     st.set_page_config(page_title="Zebra Label", page_icon=":zebra_face:", layout="wide")
     
