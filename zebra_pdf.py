@@ -5,6 +5,14 @@ import pdb
 
 def generate_pdf(batch_files, now):
 
+    inch_converter = 0.0393701
+
+    width_mm = 60
+    height_mm = 40
+
+    width_inch = width_mm * inch_converter
+    height_inch = height_mm * inch_converter
+
     batch_files_pdf = []
 
     for file_path in batch_files:
@@ -13,7 +21,7 @@ def generate_pdf(batch_files, now):
             zpl = f.read()
 
         # adjust print density (8dpmm), label width (4 inches), label height (6 inches), and label index (0) as necessary
-        url = 'http://api.labelary.com/v1/printers/8dpmm/labels/4x6/'
+        url = f'http://api.labelary.com/v1/printers/8dpmm/labels/{width_inch}x{height_inch}/'
         files = {'file' : zpl}
         headers = {'Accept' : 'application/pdf'} # omit this line to get PNG images back
         response = requests.post(url, headers = headers, files = files, stream = True)
